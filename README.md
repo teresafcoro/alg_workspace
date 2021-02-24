@@ -1,10 +1,12 @@
-# algorithmicsGarciaDiazVicenteUO42478
-Repository for the Algorithmics course at the School of Computer Engineering of the University of Oviedo
+# alg_PerezJuanRamonUO22223
+Repositorio para la asignatura de Algoritmia en el Grado de Ingeniería Informática del Software de la Universidad de Oviedo
 
-## Information
-**Student**: Vicente García Díaz
+## Información
+**Estudiante**: Juan Ramón Pérez Pérez
 
-**Year**: 2021
+**Correo**: jrpp@uniovi.es
 
-**Repository URL**: https://github.com/vicegd/algorithmicsGarciaDiazVicenteUO42478
+**Curso**: 2020-2021
+
+**URL del repositorio**: https://github.com/juanrperez/alg_PerezJuanRamonUO22223
 
