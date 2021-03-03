@@ -22,8 +22,8 @@ public class Seleccion extends Vector {
 			for (int j = i + 1; j < n; j++) {
 				if (elements[j] < elements[posmin])
 					posmin = j;
-				intercambiar(i, posmin);
 			}
+			intercambiar(i, posmin);
 		}
 	}
 

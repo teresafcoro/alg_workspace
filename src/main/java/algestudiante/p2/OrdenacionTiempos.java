@@ -3,7 +3,7 @@ package algestudiante.p2;
 public class OrdenacionTiempos {
 
 	private static int nTam = 20;
-	private static int nVeces = 1;
+	private static int nVeces = 1000;
 
 	/**
 	 * Este programa sirve para probar todos los algoritmos de ordenacion
@@ -13,7 +13,7 @@ public class OrdenacionTiempos {
 
 		int[] it = new int[nTam];
 		int i = 0;
-		for (int tam = 1_000; tam <= Integer.MAX_VALUE && i < it.length; tam *= 2) {
+		for (int tam = 10000; tam <= Integer.MAX_VALUE && i < it.length; tam *= 2) {
 			it[i] = tam;
 			i++;
 		}
@@ -24,19 +24,19 @@ public class OrdenacionTiempos {
 		System.out.println("i= " + i);
 
 		// Medir tiempo: Insercion
-		medirTiempos(new Insercion(n), it, opcion);
-
-		// Medir tiempo: Seleccion
-		medirTiempos(new Seleccion(n), it, opcion);
-
-		// Medir tiempo: Burbuja
-		medirTiempos(new Burbuja(n), it, opcion);
-
-		// Medir tiempo: RapidoFatal
-		medirTiempos(new RapidoFatal(n), it, opcion);
-
-		// Medir tiempo: RapidoCentral
-		medirTiempos(new RapidoCentral(n), it, opcion);
+//		medirTiempos(new Insercion(n), it, opcion);
+//
+//		// Medir tiempo: Seleccion
+//		medirTiempos(new Seleccion(n), it, opcion);
+//
+//		// Medir tiempo: Burbuja
+//		medirTiempos(new Burbuja(n), it, opcion);
+//
+//		// Medir tiempo: RapidoFatal
+//		medirTiempos(new RapidoFatal(n), it, opcion);
+//
+//		// Medir tiempo: RapidoCentral
+//		medirTiempos(new RapidoCentral(n), it, opcion);
 
 		// Medir tiempo: RapidoMediana
 		medirTiempos(new RapidoMediana(n), it, opcion);
@@ -58,7 +58,6 @@ public class OrdenacionTiempos {
 
 			t1 = System.currentTimeMillis();
 			for (int repeticiones = 1; repeticiones <= nVeces; repeticiones++) {
-				v.ordenAleatorio();
 				v.ordenar();
 			}
 			t2 = System.currentTimeMillis();

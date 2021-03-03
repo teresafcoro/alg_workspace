@@ -12,8 +12,8 @@ public class RapidoMediana extends Vector {
 
 	/**
 	 * Calcula la mediana entre tres elementos en el vector: el primero, el último y
-	 * el central Coloca estos tres elementos de tal forma que queden el menor la la
-	 * izquierda, la mediana en el centro y el mayor la la derecha
+	 * el central. Coloca estos tres elementos de tal forma que queden el menor a la
+	 * izquierda, la mediana en el centro y el mayor a la derecha.
 	 * 
 	 * @return la posición que ocupa la mediana entre estos tres elemenos
 	 */
@@ -33,8 +33,17 @@ public class RapidoMediana extends Vector {
 	 * a la derecha ningun menor. Es un proceso lineal O(n).
 	 */
 	private int particion(int iz, int de) {
-		// TODO: Implementación del método de partición
-		return -1;
+		int i, pivote;
+		intercambiar(getMediana3(iz, de, (iz + de) / 2), iz);
+		pivote = this.elements[iz];
+		i = iz;
+		for (int s = iz + 1; s <= de; s++)
+			if (this.elements[s] < pivote) {
+				i++;
+				intercambiar(i, s);
+			}
+		intercambiar(iz, i);// se restituye el pivote donde debe estar
+		return i; // retorna la posicion en que queda el pivote
 	}
 
 	/**
@@ -42,13 +51,17 @@ public class RapidoMediana extends Vector {
 	 * complejidad estudiada en clase
 	 */
 	private void rapirec(int iz, int de) {
-		// TODO: Implementación del método de creación de la partición
+		int m;
+		if (de > iz) {
+			m = particion(iz, de);
+			rapirec(iz, m-1);
+			rapirec(m+1, de);
+		}
 	}
 
 	@Override
 	public void ordenar() {
-		// TODO: Implementación del método de ordenación
-
+		rapirec(0, this.elements.length - 1);
 	}
 
 	@Override
