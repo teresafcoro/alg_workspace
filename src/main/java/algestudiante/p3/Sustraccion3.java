@@ -29,7 +29,7 @@ public class Sustraccion3 {
 		long t1, t2, cont;
 		int nVeces = Integer.parseInt(arg[0]);
 		boolean b = true;
-		for (int n = 100; n <= 100; n+=2) {
+		for (int n = 10; n <= 100; n += 2) {
 			t1 = System.currentTimeMillis();
 
 			for (int repeticiones = 1; repeticiones <= nVeces; repeticiones++) {
@@ -42,5 +42,5 @@ public class Sustraccion3 {
 			System.out.println(b + " n=" + n + "**TIEMPO=" + (t2 - t1) + "**nVeces=" + nVeces);
 		} // for
 	} // main
-	
+
 } // class
