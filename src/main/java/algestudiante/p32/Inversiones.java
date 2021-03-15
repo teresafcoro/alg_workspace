@@ -21,7 +21,7 @@ public class Inversiones {
 	private long invRecursivo(int i, int j) {
 		long inversiones = 0;
 		if (j-i <= 1) {	// condicion de parada
-			if (j-i == 1 && invCondicion(i, j))
+			if (j-i == 1 && i < j && ranking.get(i) > ranking.get(j))
 				inversiones ++;
 			return inversiones;
 		}
@@ -34,10 +34,6 @@ public class Inversiones {
 		return inversiones;
 	}
 	
-	private boolean invCondicion(int a, int b) {
-		return (a < b && ranking.get(a) > ranking.get(b));
-	}
-	
 	private long combina(List<Integer> rA, List<Integer> rB) {
 		long inversiones = 0;
 		int a = 0, b = 0;
@@ -46,7 +42,7 @@ public class Inversiones {
 		for (int k = 0; k < (rA.size() + rB.size()); k++) {
 			if (a == rA.size() || b == rB.size())
 				return inversiones;
-			else if (invCondicion(a, b)) {
+			else if (a < b && ranking.get(a) > ranking.get(b)) {
 				b++;
 				inversiones += rA.size() - (a + 1);
 			}
