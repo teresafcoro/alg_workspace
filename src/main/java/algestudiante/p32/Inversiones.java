@@ -20,15 +20,39 @@ public class Inversiones {
 	
 	private long invRecursivo(int i, int j) {
 		long inversiones = 0;
-		if (j-i <= 1) {
-			if (j-i == 1 && i < j && ranking.get(i).compareTo(ranking.get(j)) > 0)
-				inversiones++;
+		if (j-i <= 1) {	// condicion de parada
+			if (j-i == 1 && invCondicion(i, j))
+				inversiones ++;
 			return inversiones;
 		}
 		int m = (i+j)/2;
 		inversiones += invRecursivo(i, m);
 		inversiones += invRecursivo(m+1, j);
-//		combina(i, m, m+1, j);	// Mergesort
+		List<Integer> rankingA = ranking.subList(i, m);
+		List<Integer> rankingB = ranking.subList(m+1, j);
+		inversiones += combina(rankingA, rankingB);
+		return inversiones;
+	}
+	
+	private boolean invCondicion(int a, int b) {
+		return (a < b && ranking.get(a) > ranking.get(b));
+	}
+	
+	private long combina(List<Integer> rA, List<Integer> rB) {
+		long inversiones = 0;
+		int a = 0, b = 0;
+		inversiones += new InversionesCuadratico(rA).start();
+		inversiones += new InversionesCuadratico(rB).start();
+		for (int k = 0; k < (rA.size() + rB.size()); k++) {
+			if (a == rA.size() || b == rB.size())
+				return inversiones;
+			else if (invCondicion(a, b)) {
+				b++;
+				inversiones += rA.size() - (a + 1);
+			}
+			else
+				a++;
+		}
 		return inversiones;
 	}
 	

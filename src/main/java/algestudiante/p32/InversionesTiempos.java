@@ -18,8 +18,6 @@ public class InversionesTiempos {
 		// No tomamos tiempos de la primera ejecución ya que la primera ejecución es más
 		// lenta de lo normal
 		for (int i = 1; i <= numberFiles; i++) {
-			// Comprueba si es correcto para los nombres de paquetes empleados en tu
-			// proyecto
 			String fileName = Paths.get("").toAbsolutePath().toString() 
 					+ "/src/main/java/algestudiante/p32/datos/ranking" + i + ".txt";
 //			System.out.println("Fichero: " + fileName);
@@ -31,7 +29,7 @@ public class InversionesTiempos {
 			long t1 = System.currentTimeMillis();
 			System.out.println("Número de inversiones = " + inv1.start());
 			long t2 = System.currentTimeMillis();
-			if (i > 1)
+			if (i > 0)
 				System.out.println("El tiempo para el algoritmo DV es: " + (t2 - t1) + " milisegundos");
 
 			// Algoritmo iterativo
@@ -40,7 +38,7 @@ public class InversionesTiempos {
 			t1 = System.currentTimeMillis();
 			System.out.println("Número de inversiones = " + inv2.start());
 			t2 = System.currentTimeMillis();
-			if (i > 1)
+			if (i > 0)
 				System.out.println("El tiempo para el algortimo iterativo es: " + (t2 - t1) + " milisegundos");
 
 			System.out.println("\n****************************\n");
