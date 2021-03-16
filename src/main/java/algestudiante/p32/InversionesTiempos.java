@@ -20,7 +20,7 @@ public class InversionesTiempos {
 		for (int i = 1; i <= numberFiles; i++) {
 			String fileName = Paths.get("").toAbsolutePath().toString() 
 					+ "/src/main/java/algestudiante/p32/datos/ranking" + i + ".txt";
-//			System.out.println("Fichero: " + fileName);
+			System.out.println("Fichero: " + fileName);
 			System.out.println("Fichero: ranking" + i + ".txt");
 
 			// Algoritmo DV

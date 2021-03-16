@@ -36,18 +36,18 @@ public class Inversiones {
 	
 	private long combina(List<Integer> rA, List<Integer> rB) {
 		long inversiones = 0;
-		int a = 0, b = 0;
 		inversiones += new InversionesCuadratico(rA).start();
 		inversiones += new InversionesCuadratico(rB).start();
+		int i = 0, j = 0;
 		for (int k = 0; k < (rA.size() + rB.size()); k++) {
-			if (a == rA.size() || b == rB.size())
+			if (i == rA.size() || j == rB.size())
 				return inversiones;
-			else if (a < b && ranking.get(a) > ranking.get(b)) {
-				b++;
-				inversiones += rA.size() - (a + 1);
+			else if (i < j && ranking.get(i) > ranking.get(j)) {
+				inversiones++;
+				j++;
 			}
 			else
-				a++;
+				i++;
 		}
 		return inversiones;
 	}
