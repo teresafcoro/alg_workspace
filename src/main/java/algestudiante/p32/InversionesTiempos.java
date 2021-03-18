@@ -21,7 +21,6 @@ public class InversionesTiempos {
 			String fileName = Paths.get("").toAbsolutePath().toString() 
 					+ "/src/main/java/algestudiante/p32/datos/ranking" + i + ".txt";
 			System.out.println("Fichero: " + fileName);
-			System.out.println("Fichero: ranking" + i + ".txt");
 
 			// Algoritmo DV
 			ranking = readRankingFromFile(fileName);

@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Algoritmo Divide y Venceras
- * Complejidad O(nlogn), {a=2, b=2, k=1} <- Por division con a=b^k
+ * Complejidad O(nlogn)
  */
 public class Inversiones {
 
@@ -20,34 +20,33 @@ public class Inversiones {
 	
 	private long invRecursivo(int i, int j) {
 		long inversiones = 0;
-		if (j-i <= 1) {	// condicion de parada
-			if (j-i == 1 && i < j && ranking.get(i) > ranking.get(j))
-				inversiones ++;
+		if (j-i <= 1)	// condicion de parada
 			return inversiones;
-		}
 		int m = (i+j)/2;
 		inversiones += invRecursivo(i, m);
 		inversiones += invRecursivo(m+1, j);
-		List<Integer> rankingA = ranking.subList(i, m);
-		List<Integer> rankingB = ranking.subList(m+1, j);
-		inversiones += combina(rankingA, rankingB);
+		inversiones += combina(ranking.subList(i, m), ranking.subList(m+1, j));
 		return inversiones;
 	}
 	
 	private long combina(List<Integer> rA, List<Integer> rB) {
 		long inversiones = 0;
-		inversiones += new InversionesCuadratico(rA).start();
-		inversiones += new InversionesCuadratico(rB).start();
-		int i = 0, j = 0;
-		for (int k = 0; k < (rA.size() + rB.size()); k++) {
-			if (i == rA.size() || j == rB.size())
-				return inversiones;
-			else if (i < j && ranking.get(i) > ranking.get(j)) {
-				inversiones++;
-				j++;
-			}
-			else
+		int i=0, j=0, c1=0, c2=0;
+		for (int k = 0; k < rA.size() + rB.size(); k++) {
+			if (i < rA.size())	c1 = rA.get(i);
+			else c1 = Integer.MAX_VALUE;
+			
+			if (j < rB.size())	c2 = rB.get(j);
+			else c2 = Integer.MAX_VALUE;
+			
+			if (c1 <= c2) {
+				ranking.set(k, c1);
 				i++;
+			} else {
+				ranking.set(k, c2);
+				j++;
+				inversiones += rA.size() - i;
+			}
 		}
 		return inversiones;
 	}

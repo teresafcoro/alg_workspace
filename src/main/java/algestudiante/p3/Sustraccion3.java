@@ -1,13 +1,11 @@
 package algestudiante.p3;
 
-/*
-	Es un método recursivo POR SUSTRACCION
-	T(n)= 2 T(n-1) + O(1)
-	Los parámetros son: a=2; b=1; k=0
-	Luego la complejidad temporal es exponencial O(2^n)
-	y la complejidad MPILA es O(n), pero no se desborda
-	porque mucho antes el tiempo de ejecución se hace 
-	intratable
+/**
+ * Es un método recursivo POR SUSTRACCION
+ * T(n)= 2 T(n-1) + O(1)
+ * Los parámetros son: a=2; b=1; k=0
+ * Luego la complejidad temporal es exponencial O(2^n) y la complejidad MPILA es O(n),
+ * pero no se desborda porque mucho antes el tiempo de ejecución se hace intratable.
  */
 public class Sustraccion3 {
 

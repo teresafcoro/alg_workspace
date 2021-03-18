@@ -1,7 +1,7 @@
 package algestudiante.p31;
 
 /**
- * Complejidad O(3^(n/2)), por tanto, {a=3 (>1), b=2, k=0}
+ * Complejidad O(3^(n/2)), por tanto, {a=3, b=2, k=0}, con a>1.
  */
 public class Sustraccion4 {
 
@@ -26,11 +26,14 @@ public class Sustraccion4 {
 		boolean b = true;
 		for (int n = 10; n <= 100; n += 2) {
 			t1 = System.currentTimeMillis();
+			
 			for (int repeticiones = 1; repeticiones <= nVeces; repeticiones++) {
 				cont = 0;
 				b = rec4(n);
 			}
+			
 			t2 = System.currentTimeMillis();
+			
 			System.out.println(b + " n=" + n + "**TIEMPO=" + (t2 - t1) + "**nVeces=" + nVeces);
 		}
 	}
