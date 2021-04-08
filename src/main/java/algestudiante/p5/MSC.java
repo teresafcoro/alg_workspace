@@ -85,6 +85,7 @@ public class MSC {
 	 */
 	public void imprimeMCS() {
 		System.out.println(result);
+		System.out.println(encontar());
 	}
 
 	public class CellTable {
@@ -174,6 +175,22 @@ public class MSC {
 			return result;
 		}
 		return null;
+	}
+	
+	public String encontar() {
+		String r = "";
+		int pivote = 0;
+		for (int j = 1; j < size2; j++) {
+			for (int i = 1; i < size1; i++) {
+				if (str1.charAt(i) == str2.charAt(j) && pivote < table[i][j].value) {
+					pivote = table[i][j].value;
+					r = str1.charAt(i) + r;
+					System.out.printf("\t%4d(%2d,%2d)->%c\n", table[i][j].value, table[i][j].iPrev, table[i][j].jPrev, str1.charAt(i));
+					break;
+				}
+			}
+		}
+		return r;
 	}
 
 }

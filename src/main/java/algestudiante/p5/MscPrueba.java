@@ -3,7 +3,6 @@ package algestudiante.p5;
 public class MscPrueba {
 
 	public static void main(String arg[]) {
-		//GCATGCAT y GAATTCAG -> GATCA ; GCCCTAGCG y GCGCAATG -> GCCAG
 		String str1 = arg[0]; // primera secuencia
 		String str2 = arg[1]; // segunda secuencia
 
