@@ -15,29 +15,17 @@ public class Cancion {
 		return identificador;
 	}
 
-	public void setIdentificador(String identificador) {
-		this.identificador = identificador;
-	}
-
 	public int getDuracion() {
 		return duracion;
-	}
-
-	public void setDuracion(int duracion) {
-		this.duracion = duracion;
 	}
 
 	public int getPuntuacion() {
 		return puntuacion;
 	}
 
-	public void setPuntuacion(int puntuacion) {
-		this.puntuacion = puntuacion;
-	}
-
 	@Override
 	public String toString() {
-		return "Cancion [identificador=" + identificador + ", duracion=" + duracion + ", puntuacion=" + puntuacion
+		return "Cancion [identificador=" + identificador + ", duracion (en seg.)=" + duracion + ", puntuacion=" + puntuacion
 				+ "]";
 	}
 	

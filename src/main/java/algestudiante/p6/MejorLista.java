@@ -5,56 +5,105 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MejorLista {
 	
 	// canciones de la lista cargada
 	private static Cancion[] listaCanciones;
+	
+	private static List<Cancion> bloque1;
+	private static List<Cancion> bloque2;
 	private static String fileName;
-	private static int minutos;
+	private static int segundos;
+	private static int duracion;
+	private static int puntuacion;
+	private static int puntuacionTotal;
+	private static boolean[] usadas;
+	
+	/**
+	 * Constructor
+	 * @param name, nombre del fichero a leer para obtener la lista de canciones
+	 * @param mins, minutos de canciones que puede contener el bloque
+	 */
+	public MejorLista(String name, int mins) {
+		bloque1 = new ArrayList<Cancion>();
+		bloque2 = new ArrayList<Cancion>();
+		fileName = Paths.get("").toAbsolutePath().toString() 
+				+ "/src/main/java/algestudiante/p6/datos/" + name + ".txt";
+		segundos = mins*60;
+	}
 	
 	/**
 	 * Constructor
 	 * Inicializa el array de canciones con el array pasado como parametro
-	 * @param canciones, lista de objetos Cancion
+	 * @param cancionesAleatorias, lista de objetos Cancion
+	 * @param mins, minutos de canciones que puede contener el bloque
 	 */
-	public MejorLista(String name, int min) {
-		fileName = Paths.get("").toAbsolutePath().toString() 
-				+ "/src/main/java/algestudiante/p6/datos/" + name;
-		minutos = min;
+	public MejorLista(Cancion[] cancionesAleatorias, int mins) {
+		listaCanciones = cancionesAleatorias;
+		usadas = new boolean[listaCanciones.length];
+		segundos = mins*60;
 	}
 	
 	/**
-	 * 
+	 * Metodo recursivo que crea una lista de canciones en un bloque determinado
+	 * Siendo estas las que proporcionan una puntuacion maxima
+	 * @param bloque de canciones que se quiere crear
 	 */
-	public static void Backtracking() {
-		
+	public void Backtracking(List<Cancion> bloque) {
+		int aux = 0, pos = -1;
+		Cancion puntero = null;
+		// Selecciono la cancion con mayor puntuacion de entre las validas
+		// Si varias validas tienen igual puntuacion, escojo la de mayor duracion
+		for (int i = 0; i < listaCanciones.length; i++) {
+			if (listaCanciones[i].getPuntuacion() > aux && !usadas[i] && duracion+listaCanciones[i].getDuracion() <= segundos) {
+				aux = listaCanciones[i].getPuntuacion();
+				puntero = listaCanciones[i];
+				pos = i;
+			} else if (listaCanciones[i].getPuntuacion() == aux && listaCanciones[i].getDuracion() > puntero.getDuracion()
+						&& !usadas[i] && duracion+listaCanciones[i].getDuracion() <= segundos) {
+				puntero = listaCanciones[i];
+				pos = i;
+			}
+		}
+		if (pos != -1) {
+			usadas[pos] = true;
+			bloque.add(puntero);
+			puntuacion += puntero.getPuntuacion();
+			duracion += puntero.getDuracion();
+			Backtracking(bloque);
+		} else return;	// no hay canciones validas o bloque completo, no entran mas canciones
 	}
-
+	
 	/**
 	 * Lee las listas de las canciones y muestra la mejor lista
 	 * @param args, array de String
 	 */
 	public static void main(String[] args) {
-		System.out.print("Fichero: " + fileName);
-		readFromFile(fileName);
-		System.out.println(", crea la mejor lista con bloques de: " + minutos + " minutos");
-		/*
-		 El resultado de la ejecución del programa debe mostrar claramente:
-			El número de canciones, la duración total y la suma de las puntaciones de la lista contenida en el fichero.
-			La suma de las puntuaciones de las canciones seleccionadas (que es lo que se pretende optimizar).
-			Canciones que componen el Bloque 1 y qué duración total tienen, canciones que componen el bloque 2 y
-			que duración tienen.
-		 */
-		System.out.println("Solución:");
-		Backtracking();
+		MejorLista ml = new MejorLista("Lista01", 20);
+		System.out.print("A partir del fichero: " + fileName);
+		ml.readFromFile(fileName);
+		usadas = new boolean[listaCanciones.length];
+		System.out.println(" creo la mejor lista con bloques de " + segundos/60 + " minutos");
+		System.out.println("***Bloque1:");
+		ml.Backtracking(bloque1);
+		ml.muestraSolucion(bloque1);
+		puntuacionTotal = puntuacion;
+		duracion = puntuacion = 0;
+		System.out.println("***Bloque2:");
+		ml.Backtracking(bloque2);
+		ml.muestraSolucion(bloque2);
+		puntuacionTotal += puntuacion;
+		System.out.println("Puntuacion TOTAL: " + puntuacionTotal);
 	}
 	
 	/**
 	 * Lee el contenido de un fichero y lo almacena en un array de enteros
 	 * @param file, String, nombre y ruta del fichero
 	 */
-	public static void readFromFile(String file) {
+	public void readFromFile(String file) {
 		BufferedReader fichero = null;
 		String line;
 		String[] elements = null;
@@ -88,6 +137,18 @@ public class MejorLista {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Muestra por consola la solucion del algoritmo de backtracking para cada bloque
+	 * @param bloque, lista de canciones especificada
+	 */
+	private void muestraSolucion(List<Cancion> bloque) {
+		for (int i = 0; i < bloque.size(); i++)
+			System.out.println(bloque.get(i).toString());
+		System.out.println("Número de canciones: " + bloque.size());
+		System.out.println("Duración del bloque (en min.): " + duracion/60.0);
+		System.out.println("Puntuación del bloque: " + puntuacion);
 	}
 	
 }
