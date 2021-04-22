@@ -8,6 +8,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase MejorLista
+ * Crea dos bloques de canciones a partir de una lista, teniendo estos en total la maxima puntuacion
+ * NO se permite fragmentacion de canciones
+ * @author UO263728
+ */
 public class MejorLista {
 	
 	// canciones de la lista cargada
@@ -55,6 +61,7 @@ public class MejorLista {
 	public void Backtracking(List<Cancion> bloque) {
 		int aux = 0, pos = -1;
 		Cancion puntero = null;
+		// Busqueda del mejor nodo para lograr la solucion optima
 		// Selecciono la cancion con mayor puntuacion de entre las validas
 		// Si varias validas tienen igual puntuacion, escojo la de mayor duracion
 		for (int i = 0; i < listaCanciones.length; i++) {
@@ -83,10 +90,11 @@ public class MejorLista {
 	 */
 	public static void main(String[] args) {
 		MejorLista ml = new MejorLista("Lista01", 20);
-		System.out.print("A partir del fichero: " + fileName);
+		System.out.println("A partir del fichero: " + fileName);
 		ml.readFromFile(fileName);
 		usadas = new boolean[listaCanciones.length];
-		System.out.println(" creo la mejor lista con bloques de " + segundos/60 + " minutos");
+		System.out.println("Creo la mejor lista con bloques de " + segundos/60 + " minutos");
+		ml.muestraLista();
 		System.out.println("***Bloque1:");
 		ml.Backtracking(bloque1);
 		ml.muestraSolucion(bloque1);
@@ -140,6 +148,21 @@ public class MejorLista {
 	}
 	
 	/**
+	 * Muestra por consola la informacion de la lista de canciones
+	 */
+	private void muestraLista() {
+		int dur = 0;
+		int punt = 0;
+		for (int i = 0; i < listaCanciones.length; i++) {
+			dur += listaCanciones[i].getDuracion();
+			punt += listaCanciones[i].getPuntuacion();
+		}
+		System.out.println("Número de canciones: " + listaCanciones.length);
+		System.out.println("Duración (en min.): " + dur/60.0);
+		System.out.println("Puntuación: " + punt);
+	}
+	
+	/**
 	 * Muestra por consola la solucion del algoritmo de backtracking para cada bloque
 	 * @param bloque, lista de canciones especificada
 	 */
@@ -147,8 +170,8 @@ public class MejorLista {
 		for (int i = 0; i < bloque.size(); i++)
 			System.out.println(bloque.get(i).toString());
 		System.out.println("Número de canciones: " + bloque.size());
-		System.out.println("Duración del bloque (en min.): " + duracion/60.0);
-		System.out.println("Puntuación del bloque: " + puntuacion);
+		System.out.println("Duración (en min.): " + duracion/60.0);
+		System.out.println("Puntuación: " + puntuacion);
 	}
 	
 }

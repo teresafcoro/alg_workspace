@@ -3,6 +3,11 @@ package algestudiante.p6;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase MejorListaTiempos
+ * Calcula el tiempo que tarda en ejecutarse el algoritmo de backtracking de la clase MejorLista
+ * @author UO263728
+ */
 public class MejorListaTiempos {
 	
 	private static Cancion[] cancionesAleatorias;
@@ -11,25 +16,26 @@ public class MejorListaTiempos {
 	private static List<Cancion> bloque2 = new ArrayList<Cancion>();
 	
 	/**
-	 * 
+	 * Mide el tiempo que tarda el algoritmo de backtracking en ejecutarse
 	 * @param nVeces, veces a ejecutar el algoritmo para un array dado
-	 * @param opcion, algoritmo a ejecutar
 	 */
-	public static void medirTiempos(int nVeces, int min) {
-		System.out.println("Creo la mejor lista con bloques de " + min + " minutos sobre canciones aleatorias");
+	public static void medirTiempos(int nVeces) {
+		System.out.println("Creo la mejor lista sobre canciones aleatorias");
 		long t1, t2;
-		for (int n = 5; n < 30; n += 5) {
+		for (int n = 5; n < 101; n += 5) {
 			t1 = System.currentTimeMillis();
 			
 			cancionesAleatorias = new Cancion[n];
-			for (int i = 0; i < cancionesAleatorias.length; i++)
-				cancionesAleatorias[i] =  new Cancion(identAleatorio(), (int) (Math.random()*240+60), (int) (Math.random()*6000+1000));
-			ml = new MejorLista(cancionesAleatorias, min);
+			int t = 0;
+			for (int i = 0; i < cancionesAleatorias.length; i++) {
+				cancionesAleatorias[i] = new Cancion(identAleatorio(), (int) (Math.random()*300+120), (int) (Math.random()*5000+1000));
+				t += cancionesAleatorias[i].getDuracion();
+			}
+			t = (int) ((t/60)*0.25);
+			ml = new MejorLista(cancionesAleatorias, t);
 			
 			for (int repeticiones = 1; repeticiones <= nVeces; repeticiones++) {
-				System.out.println("***Calculo Bloque1:");
 				ml.Backtracking(bloque1);
-				System.out.println("***Calculo Bloque2:");
 				ml.Backtracking(bloque2);
 			}
 			
@@ -39,6 +45,10 @@ public class MejorListaTiempos {
 		}
 	}
 
+	/**
+	 * Crea una cadena aleatoria para el identificador de la cancion
+	 * @return ident, String
+	 */
 	private static String identAleatorio() {
 		String ident = "";
 		String opciones = "abcdefghijklmnñopqrstuvwxyz0123456789";
@@ -49,10 +59,13 @@ public class MejorListaTiempos {
 		return ident;
 	}
 
-	public static void main(String[] args) {
-		int nVeces = Integer.parseInt(args[0]);
-		int min = Integer.parseInt(args[1]);
-		medirTiempos(nVeces, min);
+	/**
+	 * Llamo al metodo medirTiempos para medir el metodo backtracking de la clase MejorLista
+	 * @param arg, array de Strings
+	 */
+	public static void main(String[] arg) {
+		int nVeces = Integer.parseInt(arg[0]);
+		medirTiempos(nVeces);
 	}
 
 }
