@@ -1,4 +1,4 @@
-package algestudiante.p6;
+package algestudiante.p7;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -14,7 +14,7 @@ import java.util.List;
  * NO se permite fragmentacion de canciones
  * @author UO263728
  */
-public class MejorLista {
+public class MejorListaRP {
 	
 	// canciones de la lista cargada
 	private static Cancion[] listaCanciones;
@@ -36,7 +36,7 @@ public class MejorLista {
 	 * @param name, nombre del fichero a leer para obtener la lista de canciones
 	 * @param mins, minutos de canciones que puede contener el bloque
 	 */
-	public MejorLista(String name, int mins) {
+	public MejorListaRP(String name, int mins) {
 		bloque1 = new ArrayList<Cancion>();
 		bloque2 = new ArrayList<Cancion>();
 		fileName = Paths.get("").toAbsolutePath().toString() 
@@ -50,7 +50,7 @@ public class MejorLista {
 	 * @param cancionesAleatorias, lista de objetos Cancion
 	 * @param mins, minutos de canciones que puede contener el bloque
 	 */
-	public MejorLista(Cancion[] cancionesAleatorias, int mins) {
+	public MejorListaRP(Cancion[] cancionesAleatorias, int mins) {
 		listaCanciones = cancionesAleatorias;
 		usadas = new boolean[listaCanciones.length];
 		segundos = mins*60;
@@ -98,7 +98,7 @@ public class MejorLista {
 	 * @param args, array de String
 	 */
 	public static void main(String[] args) {
-		MejorLista ml = new MejorLista("Lista02", 5);
+		MejorListaRP ml = new MejorListaRP("Lista02", 5);
 		System.out.println("A partir del fichero: " + fileName);
 		ml.readFromFile(fileName);
 		usadas = new boolean[listaCanciones.length];
