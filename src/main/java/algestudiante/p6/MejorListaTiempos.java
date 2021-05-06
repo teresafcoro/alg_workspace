@@ -22,7 +22,7 @@ public class MejorListaTiempos {
 	public static void medirTiempos(int nVeces) {
 		System.out.println("Creo la mejor lista sobre canciones aleatorias");
 		long t1, t2;
-		for (int n = 5; n < 101; n += 5) {
+		for (int n = 5; n <= 100; n += 5) {
 			t1 = System.currentTimeMillis();
 			
 			cancionesAleatorias = new Cancion[n];
@@ -38,7 +38,7 @@ public class MejorListaTiempos {
 				ml.Backtracking(bloque1);
 				ml.Backtracking(bloque2);
 			}
-			
+
 			t2 = System.currentTimeMillis();
 			
 			System.out.println("n=" + n + "**TIEMPO=" + (t2 - t1) + "**nVeces=" + nVeces);

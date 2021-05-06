@@ -12,22 +12,26 @@ import java.util.List;
  * Clase MejorLista
  * Crea dos bloques de canciones a partir de una lista, teniendo estos en total la maxima puntuacion
  * NO se permite fragmentacion de canciones
+ * 
+ * Backtracking es un algoritmo de fuerza bruta, prueba las posibles soluciones hasta dar con la optima
+ * 
+ * Complejidad: O(grado^altura del arbol), exponencial ó factorial, O(n!), si el grado del arbol se 
+ * reduce en cada nivel, hasta 1, debido a las comprobaciones de validez
+ * 
  * @author UO263728
  */
 public class MejorLista {
 	
-	// canciones de la lista cargada
 	private static Cancion[] listaCanciones;
-	
 	private static List<Cancion> bloque1;
 	private static List<Cancion> bloque2;
 	private static String fileName;
 	private static int segundos;
+	
 	private static int duracion;
 	private static int puntuacion;
 	private static int duracionMejor;
 	private static int puntuacionMejor;
-	private static int puntuacionTotal;
 	private static boolean[] usadas;
 	private static boolean bloqueCompleto;
 	
@@ -55,7 +59,7 @@ public class MejorLista {
 		usadas = new boolean[listaCanciones.length];
 		segundos = mins*60;
 	}
-	
+
 	/**
 	 * Metodo recursivo que crea una lista de canciones en un bloque determinado
 	 * Siendo estas las que proporcionan una puntuacion maxima
@@ -86,7 +90,6 @@ public class MejorLista {
 				duracion += listaCanciones[cancionSeleccionada].getDuracion();
 				Backtracking(bloque);
 				bloqueCompleto = false;
-//				usadas[cancionSeleccionada] = false;
 				puntuacion -= listaCanciones[cancionSeleccionada].getPuntuacion();
 				duracion -= listaCanciones[cancionSeleccionada].getDuracion();
 			}
@@ -98,7 +101,7 @@ public class MejorLista {
 	 * @param args, array de String
 	 */
 	public static void main(String[] args) {
-		MejorLista ml = new MejorLista("Lista02", 5);
+		MejorLista ml = new MejorLista("Lista01", 15);
 		System.out.println("A partir del fichero: " + fileName);
 		ml.readFromFile(fileName);
 		usadas = new boolean[listaCanciones.length];
@@ -107,7 +110,7 @@ public class MejorLista {
 		System.out.println("***Bloque1:");
 		ml.Backtracking(bloque1);
 		ml.muestraSolucion(bloque1);
-		puntuacionTotal = puntuacionMejor;
+		int puntuacionTotal = puntuacionMejor;
 		System.out.println("***Bloque2:");
 		ml.Backtracking(bloque2);
 		ml.muestraSolucion(bloque2);

@@ -1,8 +1,22 @@
 package algestudiante.p3;
 
+/*
+ * Sustraccion:
+ * 	O(n^k), a<1
+ *  O(n^(k+1)), a=1
+ *  O(a^(n/b)), a>1
+ *  
+ *  *a=numero de llamadas al metodo recursivo
+ *  *b=valor que se sustrae
+ *  *k=valor al que se eleva n en la complejidad del algoritmo
+ *  
+ *  **complejidades secuenciales se suman, es decir, me quedo con la mayor
+ *  **complejidades anidadas se multiplican
+ */
 /**
  * Clase que modeliza T(n)= T(n-1) + O(1) La complejidad temporal es O(n) y el
  * gasto de pila es Mpila=O(n) En consecuencia la pila se desborda
+ * {a=1, b=1, k=0} =) O(n)
  */
 public class Sustraccion1 {
 

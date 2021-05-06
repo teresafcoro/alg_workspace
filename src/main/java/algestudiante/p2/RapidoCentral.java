@@ -1,8 +1,9 @@
 package algestudiante.p2;
 
 /**
- * Este programa sirve para ordenar n elementos con el algoritmo mejor. Es el
- * QUICKSORT
+ * Este programa sirve para ordenar n elementos con el algoritmo mejor
+ * Es el QUICKSORT - rapido
+ * Complejidad: O(nlogn)
  */
 public class RapidoCentral extends Vector {
 

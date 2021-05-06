@@ -24,8 +24,7 @@ public class MscPrueba {
 		System.out.println("RECURSIVO:");
 		MSCRec lcsrec = new MSCRec();
 		System.out.println("Buscando la MSC...");
-		String seq_rec = lcsrec.encontrarMSC(str1, str2);
-		System.out.println(seq_rec);
+		System.out.println(lcsrec.encontrarMSC(str1, str2));
 
 		System.out.println("Program terminated.");
 	}

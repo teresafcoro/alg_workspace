@@ -1,5 +1,18 @@
 package algestudiante.p3;
 
+/*
+ * Division:
+ * 	O(n^k), a < b^k
+ *  O(n^k * logn), a = b^k
+ *  O(n^(log en base b de a)), a > b^k
+ *  
+ *  *a=numero de llamadas al metodo recursivo
+ *  *b=valor que se sustrae
+ *  *k=valor al que se eleva n en la complejidad del algoritmo
+ *  
+ *  **complejidades secuenciales se suman, es decir, me quedo con la mayor
+ *  **complejidades anidadas se multiplican
+ */
 /**
  * Es un método recursivo POR DIVISION Los parámetros son: a=1; b=3; k=1 Luego
  * la complejidad temporal es lineal O(n) y la complejidad MPILA es O(log n),

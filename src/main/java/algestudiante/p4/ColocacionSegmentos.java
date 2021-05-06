@@ -18,6 +18,10 @@ public class ColocacionSegmentos {
 	// longitudes de los segmentos leidos del fichero
 	private static int[] longitudesSeg;
 	
+	private static int[] x, y;
+	private static double[] m;
+	private static double coste;
+	
 	/**
 	 * Constructor
 	 * Inicializa el array de longitudes de segmentos con el array pasado como parametro
@@ -34,20 +38,26 @@ public class ColocacionSegmentos {
 	 * @param n, tipo de devorador usado
 	 */
 	private static void seleccionSeg(int n) {
-		int x, y = 0;
-		double m, coste = 0;
+//		int x, y = 0;
+		x[0] = y[0] = 0;
+//		double m, coste = 0;
 		for (int i = 0; i < longitudesSeg.length; i++) {
-			x = y;
-			y += longitudesSeg[i];
-			m = (x + y) / 2.0;
-			System.out.println("S"+i+": ("+x+" a "+y+"), punto medio = "+m);
-			coste += m;
+			if (i != 0) {
+				x[i] = y[i-1];
+				y[i] = y[i-1] + longitudesSeg[i];
+			}
+			else
+				y[i] = longitudesSeg[i];
+			m[i] = (x[i] + y[i]) / 2.0;
+//			System.out.println("S"+i+": ("+x+" a "+y+"), punto medio = "+m);
+			coste += m[i];
 		}
-		System.out.println("Coste DEVORADOR"+n+" = "+ coste +" pufosos");
+//		System.out.println("Coste DEVORADOR"+n+" = "+ coste +" pufosos");
 	}
 	
 	/**
 	 * Se colocan en el mismo orden en que estén en el fichero
+	 * Complejidad: O(n)
 	 */
 	public static void devorador1() {
 		seleccionSeg(1);
@@ -55,18 +65,20 @@ public class ColocacionSegmentos {
 	
 	/**
 	 * Se colocan de mayor a menor longitud
+	 * Complejidad: O(n)+O(n)+O(nlog(n)) =) O(nlog(n))
 	 */
 	public static void devorador2() {
-		Arrays.sort(longitudesSeg);	// O(nlog(n))
-		ordenInverso();
+		Arrays.sort(longitudesSeg);	// Complejidad alg. de ordenacion: O(nlog(n))
+		ordenInverso(); // Complejidad alg. de ordenacion: O(n)
 		seleccionSeg(2);
 	}
 
 	/**
 	 * Se colocan de menor a mayor longitud
+	 * Complejidad: O(n)+O(nlog(n)) =) O(nlog(n))
 	 */
 	public static void devorador3() {
-		Arrays.sort(longitudesSeg);
+		Arrays.sort(longitudesSeg);	// Complejidad alg. de ordenacion: O(nlog(n))
 		seleccionSeg(3);
 	}
 	
@@ -93,14 +105,20 @@ public class ColocacionSegmentos {
 					+ "/src/main/java/algestudiante/p4/datos/juego" + i + ".txt";
 			System.out.println("Fichero: " + fileName);
 			longitudesSeg = readFromFile(fileName);
+			inicializar();
 			System.out.println("Devorador1:");
 			devorador1();
+			mostrar(1);
 			System.out.println("--------------------------------------------------------------------");
+			inicializar();
 			System.out.println("Devorador2:");
 			devorador2();
+			mostrar(2);
 			System.out.println("--------------------------------------------------------------------");
+			inicializar();
 			System.out.println("Devorador3:");
 			devorador3();
+			mostrar(3);
 			System.out.println("--------------------------------------------------------------------");
 		}
 	}
@@ -139,6 +157,19 @@ public class ColocacionSegmentos {
 				}
 		}
 		return elements;
+	}
+	
+	private static void inicializar() {
+		x = new int[longitudesSeg.length];
+		y = new int[longitudesSeg.length];
+		m = new double[longitudesSeg.length];
+		coste = 0;
+	}
+	
+	private static void mostrar(int n) {
+		for (int i = 0; i < longitudesSeg.length; i++)
+			System.out.println("S" + i + ": (" + x[i] + " a " + y[i] + "), punto medio = " + m[i]);
+		System.out.println("Coste DEVORADOR" + n + " = " + coste + " pufosos");
 	}
 
 }

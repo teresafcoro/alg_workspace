@@ -2,7 +2,8 @@ package algestudiante.p2;
 
 /**
  * Este programa sirve para ordenar n elementos con un algoritmo de los "malos"
- * (cuadrático)· es la SELECCION
+ * Es la SELECCION
+ * Complejidad: O(n^2), para cualquier caso (mejor, medio y peor)
  */
 public class Seleccion extends Vector {
 

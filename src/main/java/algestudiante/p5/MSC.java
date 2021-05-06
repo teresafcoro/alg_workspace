@@ -2,6 +2,7 @@ package algestudiante.p5;
 
 import java.util.Random;
 
+// PD garantiza una solucion optima en cualquier caso
 public class MSC {
 
 	CellTable[][] table; // tabla con los valores intermedios
@@ -85,7 +86,6 @@ public class MSC {
 	 */
 	public void imprimeMCS() {
 		System.out.println(result);
-		System.out.println(encontar());
 	}
 
 	public class CellTable {
@@ -157,40 +157,18 @@ public class MSC {
 	public String encontarMSC(boolean v) {
 		// TODO: después de rellenas la tabla, reconstruye la MSC empezando por el
 		// último elemento
-		if (v) {
-			int i = size1-1, j = size2-1;
-			while (i > j) {
-				if (str1.charAt(i) == str2.charAt(j)) {
-					result = str1.charAt(i) + result;
-					System.out.printf("\t%4d(%2d,%2d)->%c\n", table[i][j].value, table[i][j].iPrev, table[i][j].jPrev, str1.charAt(i));
-					i--;
-				}
-			}
-			for (int k = size2-1; k > 0; k--) {
-				if (str1.charAt(k) == str2.charAt(k)) {
-					result = str1.charAt(k) + result;
-					System.out.printf("\t%4d(%2d,%2d)->%c\n", table[k][k].value, table[k][k].iPrev, table[k][k].jPrev, str1.charAt(k));
-				}
-			}
-			return result;
-		}
-		return null;
-	}
-	
-	public String encontar() {
-		String r = "";
 		int pivote = 0;
 		for (int j = 1; j < size2; j++) {
 			for (int i = 1; i < size1; i++) {
 				if (str1.charAt(i) == str2.charAt(j) && pivote < table[i][j].value) {
 					pivote = table[i][j].value;
-					r = str1.charAt(i) + r;
+					result = result + str1.charAt(i);
 					System.out.printf("\t%4d(%2d,%2d)->%c\n", table[i][j].value, table[i][j].iPrev, table[i][j].jPrev, str1.charAt(i));
 					break;
 				}
 			}
 		}
-		return r;
+		return v ? result : null;
 	}
-
+	
 }

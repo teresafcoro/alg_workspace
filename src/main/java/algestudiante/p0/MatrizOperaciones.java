@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * Clase MatrizOperaciones 
+ * Clase MatrizOperaciones
  * @author UO263728
  */
 public class MatrizOperaciones {
@@ -24,7 +24,7 @@ public class MatrizOperaciones {
 	
 	/**
 	 * Constructor
-	 * Inicializa la matriz cuadrada con el tama�o pasado por parametro
+	 * Inicializa la matriz cuadrada con el tamaño pasado por parametro
 	 * @param tam, tipo int
 	 */
 	public MatrizOperaciones(int tam) {
@@ -33,9 +33,9 @@ public class MatrizOperaciones {
 	
 	/**
 	 * Constructor
-	 * Crea una matriz de tama�o nxn
+	 * Crea una matriz de tamaño nxn
 	 * La rellena con valores aleatorios, estos deben de ser parametrizables
-	 * entre un m�ximo (max) y un m�nimo (min).
+	 * entre un máximo (max) y un mínimo (min).
 	 * @param n, tipo int
 	 * @param min, tipo int
 	 * @param max, tipo int
@@ -66,10 +66,9 @@ public class MatrizOperaciones {
 	/**
 	 * Constructor
 	 * Crea una matriz a partir de los datos del fichero
-	 * El formato del fichero ser�:
-	 * -Primera l�nea, un entero con tama�o de la matriz (n).
-	 * -Resto de las l�neas, la fila correspondiente en la que cada valor estar� separado
-	 *   					 por un tabulador del siguiente.
+	 * El formato del fichero será:
+	 * -Primera línea, un entero con tamaño de la matriz (n).
+	 * -Resto de las líneas, la fila correspondiente en la que cada valor estará separado por un tabulador del siguiente.
 	 * @param nomFich, tipo String
 	 */
 	public MatrizOperaciones(String nomFich) {
@@ -97,7 +96,7 @@ public class MatrizOperaciones {
 	}
 	
 	/**
-	 * Devuelve el tama�o de la matriz
+	 * Devuelve el tamaño de la matriz
 	 * @return tipo int
 	 */
 	public int getTam() {
@@ -117,7 +116,7 @@ public class MatrizOperaciones {
 	
 	/**
 	 * Calcula de forma iterativa la suma de los valores de la diagonal principal
-	 * Forma 1: recorrer toda la matriz, pero s�lo sumando los elementos de la diagonal
+	 * Forma 1: recorrer toda la matriz, pero sólo sumando los elementos de la diagonal
 	 * @return suma, tipo int
 	 */
 	public int sumarDiagonal1() {
@@ -133,7 +132,7 @@ public class MatrizOperaciones {
 	
 	/**
 	 * Calcula de forma iterativa la suma de los valores de la diagonal principal
-	 * Forma 2: recorrer los elementos de la diagonal sum�ndolos
+	 * Forma 2: recorrer los elementos de la diagonal sumándolos
 	 * @return suma, tipo int
 	 */
 	public int sumarDiagonal2() {
@@ -162,12 +161,15 @@ public class MatrizOperaciones {
 			else if (value == 2) j++;
 			else if (value == 3) i++;
 			else j--;
-			if (0 > i || i >= getTam() || 0 > j || j >= getTam())	return;
+			if (0 > i || i >= getTam() || 0 > j || j >= getTam())
+				return;
 		} while (matriz[i][j] != -1);
 	}
-	
-	/***************************************************************************************/
-	
+
+	/**
+	 * Metodo principal de la clase
+	 * @param args, array de tipo String
+	 */
 	public static void main(String[] args) {
 //		int[][] matriz = {{2,2,1,2,4},{3,4,3,3,2},{1,4,4,1,1},{3,1,1,2,2},{1,2,3,3,2}};
 //		MatrizOperaciones m = new MatrizOperaciones(matriz);

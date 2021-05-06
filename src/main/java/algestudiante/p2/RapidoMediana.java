@@ -1,8 +1,9 @@
 package algestudiante.p2;
 
 /**
- * Este programa sirve para ordenar n elementos con el algoritmo mejor. Es el
- * QUICKSORT
+ * Este programa sirve para ordenar n elementos con el algoritmo mejor
+ * Es el QUICKSORT - rapido mediana a tres
+ * Complejidad: O(nlogn)
  */
 public class RapidoMediana extends Vector {
 

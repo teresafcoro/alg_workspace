@@ -3,6 +3,7 @@ package algestudiante.p3;
 /**
  * Clase que modeliza T(n)= T(n-1) + O(n) La complejidad temporal es cuadrática
  * O(n^2) y el gasto de pila es Mpila=O(n) En consecuencia la pila se desborda
+ * {a=1, b=1, k=1} =) O(n^2)
  */
 public class Sustraccion2 {
 

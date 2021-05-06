@@ -6,12 +6,6 @@ public class Vector2 {
 
 	public static void main(String[] args) {
 		int n = 1000000000;
-		/*
-		 * Otra forma sería: 
-		 * int n = Integer.parseInt(args[0]);
-		 * Y después, en el símbolo Run -> Run configurations... -> Arguments introducir n
-		 */
-		
 		v = new int[n];
 		Vector1.rellena(v);
 

@@ -1,5 +1,9 @@
 package algestudiante.p2;
 
+/**
+ * Este programa sirve para ordenar n elementos con un algoritmo de BURBUJA
+ * Complejidad: O(n^2), para cualquier caso (mejor, medio y peor).
+ */
 public class Burbuja extends Vector {
 
 	public Burbuja(int nElementos) {

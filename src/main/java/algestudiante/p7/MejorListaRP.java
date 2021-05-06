@@ -1,5 +1,7 @@
 package algestudiante.p7;
 
+import algestudiante.p6.Cancion;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,20 +16,18 @@ import java.util.List;
  * NO se permite fragmentacion de canciones
  * @author UO263728
  */
-public class MejorListaRP {
+public class MejorListaRP extends RamificaYPoda  {
 	
-	// canciones de la lista cargada
 	private static Cancion[] listaCanciones;
-	
 	private static List<Cancion> bloque1;
 	private static List<Cancion> bloque2;
 	private static String fileName;
 	private static int segundos;
+	
 	private static int duracion;
 	private static int puntuacion;
 	private static int duracionMejor;
 	private static int puntuacionMejor;
-	private static int puntuacionTotal;
 	private static boolean[] usadas;
 	private static boolean bloqueCompleto;
 	
@@ -55,7 +55,7 @@ public class MejorListaRP {
 		usadas = new boolean[listaCanciones.length];
 		segundos = mins*60;
 	}
-	
+
 	/**
 	 * Metodo recursivo que crea una lista de canciones en un bloque determinado
 	 * Siendo estas las que proporcionan una puntuacion maxima
@@ -86,7 +86,6 @@ public class MejorListaRP {
 				duracion += listaCanciones[cancionSeleccionada].getDuracion();
 				Backtracking(bloque);
 				bloqueCompleto = false;
-//				usadas[cancionSeleccionada] = false;
 				puntuacion -= listaCanciones[cancionSeleccionada].getPuntuacion();
 				duracion -= listaCanciones[cancionSeleccionada].getDuracion();
 			}
@@ -98,21 +97,23 @@ public class MejorListaRP {
 	 * @param args, array de String
 	 */
 	public static void main(String[] args) {
-		MejorListaRP ml = new MejorListaRP("Lista02", 5);
+		MejorListaRP ml = new MejorListaRP("Lista01", 15);
 		System.out.println("A partir del fichero: " + fileName);
 		ml.readFromFile(fileName);
 		usadas = new boolean[listaCanciones.length];
 		System.out.println("Creo la mejor lista con bloques de " + segundos/60 + " minutos");
 		ml.muestraLista();
-		System.out.println("***Bloque1:");
-		ml.Backtracking(bloque1);
-		ml.muestraSolucion(bloque1);
-		puntuacionTotal = puntuacionMejor;
-		System.out.println("***Bloque2:");
-		ml.Backtracking(bloque2);
-		ml.muestraSolucion(bloque2);
-		puntuacionTotal += puntuacionMejor;
-		System.out.println("Puntuacion TOTAL: " + puntuacionTotal);
+		ml.ramificaYPoda();
+		
+//		System.out.println("***Bloque1:");
+//		ml.Backtracking(bloque1);
+//		ml.muestraSolucion(bloque1);
+//		int puntuacionTotal = puntuacionMejor;
+//		System.out.println("***Bloque2:");
+//		ml.Backtracking(bloque2);
+//		ml.muestraSolucion(bloque2);
+//		puntuacionTotal += puntuacionMejor;
+//		System.out.println("Puntuacion TOTAL: " + puntuacionTotal);
 	}
 	
 	/**

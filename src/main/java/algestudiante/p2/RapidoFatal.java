@@ -1,9 +1,13 @@
 package algestudiante.p2;
 
 /**
- * Este programa sirve para ordenar n elementos con un algoritmo QUICKSORT Pero
- * como selecciona como pivote el elemento primero de la partición, si se le
- * mete el array ordenado tiene un comportamiento fatal (cuadrático).
+ * Este programa sirve para ordenar n elementos
+ * Se selecciona como pivote el elemento primero de la partición,
+ * 		si se le pasa un array ordenado tiene un comportamiento fatal
+ * 		también cuando el pivote es el mínimo o máximo elemento, pues una de las particiones resultará estar vacía.
+ * Es el QUICKSORT - rapido fatal
+ * Complejidad: O(n^2)
+ * Implementacion del caso peor
  */
 public class RapidoFatal extends Vector {
 

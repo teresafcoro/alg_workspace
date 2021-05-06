@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class MSCRec {
 	
+	String msc = "";
+	char c1, c2;
+	String s1_apostrofe, s2_apostrofe, l1, l2, l3;
+	
 	/**
 	 * Genera una secuencia aleatoria
 	 * @param n tamaño de la secuencia
@@ -22,31 +26,29 @@ public class MSCRec {
 	 * Encuentra un MSC directamente a través de una aproximación recursiva
 	 */
 	public String encontrarMSC(String s1, String s2) {
-		// TODO: encuentra un MSC de dos secuencias directamente (sin usar una tabla)
-		// mediante recursion
-		String msc = "";
+		// TODO: encuentra un MSC de dos secuencias directamente mediante recursion
 		if (s1.isEmpty() || s2.isEmpty())
-			return "";
-		char c1 = s1.charAt(s1.length()-1);
-		char c2 = s2.charAt(s2.length()-1);
-		String s1_apostrofe = s1.substring(0, s1.length()-1);
-		String s2_apostrofe = s2.substring(0, s2.length()-1);
-		String l1 = encontrarMSC(s1_apostrofe, s2);
-		String l2 = encontrarMSC(s1, s2_apostrofe);
-		String l3 = encontrarMSC(s1_apostrofe, s2_apostrofe);
+			msc += "";
+		c1 = s1.charAt(s1.length()-1);
+		c2 = s2.charAt(s2.length()-1);
+		s1_apostrofe = s1.substring(0, s1.length()-1);
+		s2_apostrofe = s2.substring(0, s2.length()-1);
+		l1 = encontrarMSC(s1_apostrofe, s2);
+		l2 = encontrarMSC(s1, s2_apostrofe);
+		l3 = encontrarMSC(s1_apostrofe, s2_apostrofe);
 		int max;
 		if (c1 == c2)
-			max = maxima(l1, l2, l3+1);
+			max = maxima(l1.length(), l2.length(), l3.length()+1);
 		else
-			max = maxima(l1, l2, l3);
+			max = maxima(l1.length(), l2.length(), l3.length());
 		if (max == 1)
-			msc = msc.concat(l1);
+			msc += l1;
 		else if (max == 2)
-			msc = msc.concat(l2);
+			msc += l2;
 		else
-			msc = msc.concat(l3);
+			msc += l3;
 		return msc;
-	}
+	}	
 
 	/**
 	 * Devuelva el indice de la cadena más larga introducida
@@ -55,10 +57,9 @@ public class MSCRec {
 	 * @param l3 e.g. input L3=MSC(S1', S2') or L3+1 when both current chars are equal
 	 * @return índice de la cadena más larga
 	 */
-	private int maxima(String l1, String l2, String l3) {
+	private int maxima(int num1, int num2, int num3) {
 		// TODO (opcional): a partir de tres cadenas (p.e. subsecuencias) determina el
 		// índice de la más larga
-		int num1 = l1.length(), num2 = l2.length(), num3 = l3.length();
 		if (num1 > num2 && num1 > num3)
 			return 1;
 		else if (num2 > num1 && num2 > num3)

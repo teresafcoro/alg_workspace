@@ -1,6 +1,7 @@
 package algestudiante.p11;
 
 public class TiemposJava {
+	
 	public static void lineal(long n) { // * O(n )
 		long cont = 0;
 		for (long i = 1; i <= n; i++)
@@ -42,6 +43,5 @@ public class TiemposJava {
 			System.out.println("  n=" + n + "  TIEMPO=" + (t2 - t1));
 			n = n * 2;
 		}
-
-	}// main
-} // class
+	}
+}

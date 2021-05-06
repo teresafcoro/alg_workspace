@@ -1,15 +1,5 @@
 package algestudiante.p11;
 
-/*
- * JAVA es sensible a minúsculas y mayusculas (minúscula != mayúscula)
- * Es normal que una clase comience por letra mayúscula.
- * Los métodos y todo tipo de variables comienzan por minúscula.
- * Las clases JAVA se guardan en ficheros con el mismo nombre al que se añade
- * la extensión Nombre.java.
- * Los paquetes deben estar en directorio del mismo nombre, esto es,
- * el paquete alg77777777.p1 debe estar en el directorio alg77777777\p1.
- */
-
 import java.util.Random; // Clase que genera números aleatorios
 
 /**
@@ -76,11 +66,12 @@ public class Vector1 {
 		int n = a.length;
 		m[0] = 0; // posición inicial
 		m[1] = a[0]; // primer elemento como referencia
-		for (int i = 1; i < n; i++)
+		for (int i = 1; i < n; i++) {
 			if (a[i] > m[1]) {
 				m[0] = i;
 				m[1] = a[i];
 			}
+		}
 	}
 
 }

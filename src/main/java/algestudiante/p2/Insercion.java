@@ -2,7 +2,9 @@ package algestudiante.p2;
 
 /**
  * Este programa sirve para ordenar n elementos con un algoritmo de los "malos"
- * (cuadrático) Es la INSERCIÓN DIRECTA
+ * Es la INSERCIÓN DIRECTA
+ * Complejidad: caso mejor O(n), caso medio O(n^2) y caso peor O(n^2)
+ * En esta implementacion O(n^2)
  */
 public class Insercion extends Vector {
 

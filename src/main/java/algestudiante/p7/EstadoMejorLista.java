@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Estado Mejor Lista Asignación Agentes - Tareas Hereda de la clase Estado
+ * Estado Asignaci�n Agentes - Tareas Hereda de la clase Estado
  */
 public class EstadoMejorLista extends Estado {
-	
-	// Datos comunes a todos los estados, por eso los declaramos "static"
-	private static int n; // Tamaño del problema, num. agentes y num. tareas
+
+	private static int n; // Tama�o del problema, n�m. agentes y n�m. tareas
 	private static int[][] costes; // matriz costes
 	private static boolean traza = true; // permite activar o desactivar traza
 
@@ -18,14 +17,14 @@ public class EstadoMejorLista extends Estado {
 	private boolean[] tareaConTrabajador; // Marca las tareas ya asignadas
 
 	/**
-	 * Constructor para crear el estado inicial, establecemos los datos y
+	 * Constructor para crear el estado inicial, Establecemos los datos y
 	 * condiciones iniciales del problema
 	 */
 	public EstadoMejorLista() {
 		super();
 
 		// Condiciones iniciales
-		n = 4; // numero de agentes y tareas
+		n = 4; // n�mero de agentes y tareas
 		// matriz de costes
 		costes = new int[n][n];
 		costes[0][0] = 58;
@@ -45,7 +44,7 @@ public class EstadoMejorLista extends Estado {
 		costes[3][2] = 60;
 		costes[3][3] = 54;
 
-		if (RamificaYPoda.TRAZA)
+		/**/if (RamificaYPoda.TRAZA)
 			imprimirCostes();
 
 		// Inicializa variables de cada estado
@@ -56,6 +55,7 @@ public class EstadoMejorLista extends Estado {
 		tareaConTrabajador = new boolean[solParcial.length];
 		for (int i = 0; i < n; i++)
 			tareaConTrabajador[i] = false;
+
 	}
 
 	/**
@@ -63,19 +63,19 @@ public class EstadoMejorLista extends Estado {
 	 */
 	public EstadoMejorLista(EstadoMejorLista padre, int j) {
 		super();
-		// copiamos toda la informacion del padre
+		// copiamos toda la informaci�n del padre
 		solParcial = Arrays.copyOf(padre.solParcial, n);
 		tareaConTrabajador = Arrays.copyOf(padre.tareaConTrabajador, n);
 		profundidad = padre.profundidad;
 		idPadre = padre.getId();
 
-		// añade lo correspondiente a este hijo
+		// a�ade lo correspondiente a este hijo
 		solParcial[profundidad] = j; // profundidad se corresponde con el primer agente sin asignar
 		tareaConTrabajador[j] = true; // marcamos la tarea como asignada
 		profundidad++;
 		calcularValorHeuristico();
 
-		// UNIFICA LOS DOS ÚLTIMOS NIVELES DEL ÁRBOL DE ESTADOS
+		// UNIFICA LOS DOS �LTIMOS NIVELES DEL �RBOL DE ESTADOS
 		if (profundidad == n - 1) {
 			int tareaPorAsignar = -1;
 			// Busca �ltima tarea por asignar
@@ -88,6 +88,7 @@ public class EstadoMejorLista extends Estado {
 			profundidad++;
 			calcularValorHeuristico();
 		}
+
 	}
 
 	/**
@@ -101,22 +102,24 @@ public class EstadoMejorLista extends Estado {
 		for (int i = 0; i < profundidad; i++)
 			valorHeuristico += costes[i][solParcial[i]];
 
-		// Suma los minimos de lo que resta de columna por cada tarea no asignada
+		// Suma los m�nimos de lo que resta de columna por cada tarea no asignada
 		for (int j = 0; j < n; j++)
 			if (!tareaConTrabajador[j])
 				valorHeuristico += minimoColumna(profundidad, j);
+
 	}
 
 	/**
-	 * Calcula el valor minimo por columnas
-	 * @param profundidad para saber cuantas tareas están ya asignadas
-	 * @param j ara saber que tarea se asigna en este paso
-	 * @return valor mínimo por columnas
+	 * Calcula el valor m�nimo por columnas
+	 * 
+	 * @param profundidad para saber cuantas tareas est�n ya asignadas
+	 * @param j           para saber que tarea se asigna en este paso
+	 * @return valor m�nimo por columnas
 	 */
 	private int minimoColumna(int profundidad, int j) {
 		int minValorColumna = Integer.MAX_VALUE;
 		for (int i = profundidad; i < n; i++)
-			// calculamos el mínimo de columnas
+			// calculamos el m�nimo de columnas
 			if (costes[i][j] < minValorColumna)
 				minValorColumna = costes[i][j];
 		return minValorColumna;
@@ -128,15 +131,18 @@ public class EstadoMejorLista extends Estado {
 
 		// Recorre todas las tareas
 		for (int j = 0; j < n; j++)
-			if (!tareaConTrabajador[j]) { // Crea hijo sólo para tareas NO asignadas
+			if (!tareaConTrabajador[j]) // Crea hijo s�lo para tareas NO asignadas
+			{
 				Estado estadoHijo = new EstadoMejorLista(this, j);
 				listaHijos.add(estadoHijo);
 
-				if (traza) { // imprimimos estado hijo generado
+				if (traza) // imprimimos estado hijo generado
+				{
 					System.out.println("Nivel: " + profundidad + " - Hijo: " + j);
 					System.out.println(estadoHijo);
 				}
 			}
+
 		return listaHijos;
 	}
 
@@ -148,12 +154,13 @@ public class EstadoMejorLista extends Estado {
 			return false;
 	}
 
+	@Override
+	public int valorInicialPoda()
 	/*
 	 * Inicialmente el valor de poda va a ser la menor de la suma de ambas
 	 * diagonales
 	 */
-	@Override
-	public int valorInicialPoda() {
+	{
 		int diagonal1 = 0;
 		for (int i = 0; i < n; i++)
 			diagonal1 += costes[i][i];
@@ -161,7 +168,8 @@ public class EstadoMejorLista extends Estado {
 		for (int i = 0; i < n; i++)
 			diagonal2 += costes[i][costes.length - 1 - i];
 
-		if (RamificaYPoda.TRAZA) { // muestra el valor inicial
+		/**/if (RamificaYPoda.TRAZA) // muestra el valor inicial
+		{
 			System.out.println("Valor inicial de poda");
 			System.out.println("Diagonal 1: " + diagonal1);
 			System.out.println("Diagonal 2: " + diagonal2);
